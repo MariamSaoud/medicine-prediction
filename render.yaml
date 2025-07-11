@@ -3,5 +3,5 @@ services:
     name: knn
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    startCommand: python knn.py
     pythonVersion: 3.11

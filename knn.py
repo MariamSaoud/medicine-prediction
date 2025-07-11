@@ -95,4 +95,4 @@ port=os.getenv("Port")
 app.run(host='127.0.0.1',port=port)
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
-#pip freeze > requirements.txt will override the req file
+# pip freeze > requirements.txt will override the req file

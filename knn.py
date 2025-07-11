@@ -1,15 +1,18 @@
-import pandas as pd
 from dotenv import load_dotenv
+from pathlib import Path
 import os
+import pandas as pd
 from gensim.models import Word2Vec
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from flask import Flask, request, jsonify
+dotenv_path = Path('.env.py')
+load_dotenv(dotenv_path=dotenv_path)  # Load variables from .env file
+print("PORT:", os.getenv("PORT"))
 app = Flask(__name__)
 # it creates an instance of the Flask web application (__name__ holds the name of the current Python module.)
 import numpy as np
 import nltk
-load_dotenv()  # Load variables from .env file
 df = pd.read_csv('cleaned_data2.csv')
 # print(df['Therapeutic Class'].value_counts())
 # pain analgesic              2891
@@ -91,8 +94,7 @@ def predict():
         X_input.append(get_vector(input[i], inputModel))
     c=knn.predict(X_input)
     return jsonify({'result':c[0]})
-port=os.getenv("Port")
-app.run(host='127.0.0.1',port=port)
+app.run(host='127.0.0.1',port=os.getenv("PORT"))
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
 # pip freeze > requirements.txt will override the req file

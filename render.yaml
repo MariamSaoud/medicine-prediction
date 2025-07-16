@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: knn
-    env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: python knn.py
-    pythonVersion: 3.11

@@ -8,7 +8,7 @@
   "routes": [
     {
       "src":"/(.*)",
-      "dest": "knn.py"
+      "dest": "/knn.py"
     }
   ]
 }

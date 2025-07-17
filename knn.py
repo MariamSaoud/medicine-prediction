@@ -8,7 +8,8 @@ from sklearn.model_selection import train_test_split
 from flask import Flask, request, jsonify
 dotenv_path = Path('.env.py')
 load_dotenv(dotenv_path=dotenv_path)  # Load variables from .env file
-print("PORT:", os.getenv("PORT"))
+print(__name__ == "__main__")
+print(f"__name__ is: {__name__}")
 app = Flask(__name__)
 # it creates an instance of the Flask web application (__name__ holds the name of the current Python module.)
 import numpy as np
@@ -103,8 +104,13 @@ def predict():
     c=knn.predict(X_input)
     return jsonify({'result':c[0]})
 if __name__ == "__main__":
-    print("🚀 Launching Flask app...")
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8080)))
+    print("🧪 Entering main block")
+    try:
+        app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8080)))
+        print("✅ Flask server started")
+    except Exception as e:
+        print(f"💥 Exception during app.run: {e}")
+
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
 # pip freeze > requirements.txt will override the req file

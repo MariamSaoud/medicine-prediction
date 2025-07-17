@@ -86,6 +86,9 @@ print("Accuracy:", knn.score(X_test, Y_test))
 # print(knn.predict(X_input))
 # Accuracy: 0.32555555555555554
 # ['pain analgesic' 'pain analgesic' 'pain analgesic']
+@app.route("/")
+def health_check():
+    return "OK", 200
 @app.route('/predict', methods=['POST'])
 def predict():
     input=[]
@@ -99,7 +102,9 @@ def predict():
         X_input.append(get_vector(input[i], inputModel))
     c=knn.predict(X_input)
     return jsonify({'result':c[0]})
-app.run(host='0.0.0.0',port= int(os.getenv("PORT", 8080)))
+if __name__ == "__main__":
+    print("🚀 Launching Flask app...")
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8080)))
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
 # pip freeze > requirements.txt will override the req file

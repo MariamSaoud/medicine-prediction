@@ -94,7 +94,7 @@ def predict():
         X_input.append(get_vector(input[i], inputModel))
     c=knn.predict(X_input)
     return jsonify({'result':c[0]})
-app.run(host='127.0.0.1',port=os.getenv("PORT"))
+app.run(host='0.0.0.0',port=os.getenv("PORT"))
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
 # pip freeze > requirements.txt will override the req file

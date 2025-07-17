@@ -14,11 +14,6 @@ app = Flask(__name__)
 # it creates an instance of the Flask web application (__name__ holds the name of the current Python module.)
 import numpy as np
 import nltk
-import nltk
-try:
-    nltk.data.find('tokenizers/punkt_tab')
-except LookupError:
-    nltk.download('punkt_tab')
 df = pd.read_csv('cleaned_data2.csv')
 # print(df['Therapeutic Class'].value_counts())
 # pain analgesic              2891
@@ -104,13 +99,15 @@ def predict():
     c=knn.predict(X_input)
     return jsonify({'result':c[0]})
 if __name__ == "__main__":
-    print("🧪 Entering main block")
     try:
-        app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8080)))
-        print("✅ Flask server started")
-    except Exception as e:
-        print(f"💥 Exception during app.run: {e}")
+        nltk.data.find("tokenizers/punkt_tab")
+        print("✅ punkt_tab already exists")
+    except LookupError:
+        print("⬇ Downloading punkt_tab...")
+        nltk.download("punkt_tab")
 
+    print("🚀 Starting Flask app...")
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8080)))
 # install waitress for run the app cuz flask is in developer mode
 # waitress-serve --listen=127.0.0.1:5000 knn:app (run)
 # pip freeze > requirements.txt will override the req file

@@ -13,6 +13,7 @@ app = Flask(__name__)
 # it creates an instance of the Flask web application (__name__ holds the name of the current Python module.)
 import numpy as np
 import nltk
+nltk.download('punkt_tab')
 df = pd.read_csv('cleaned_data2.csv')
 # print(df['Therapeutic Class'].value_counts())
 # pain analgesic              2891

@@ -40,7 +40,7 @@ def get_vector(text, model):
         return np.zeros(model.vector_size)
 @app.route("/")
 def health_check():
-    return "OK", 200
+    return jsonify({'result':'OK'})
 @app.route('/predict', methods=['POST'])
 def predict():
     input=[]

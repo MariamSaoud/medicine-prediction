@@ -1,12 +1,14 @@
-#!/bin/bash
-echo "🔧 Installing Git LFS..."
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
-apt-get install git-lfs -y
+# download_model.py
+import os, requests
 
-echo "🔧 Running git lfs pull..."
-git lfs install
-git lfs pull
+url = "https://github.com/MariamSaoud/medicine-prediction/raw/main/knn_model.pkl"
+dest = "knn_model.pkl"
 
-# Check if the file downloaded correctly
-echo "🔍 Model file size:"
-ls -lh knn_model.pkl
+if not os.path.exists(dest):
+    print("📥 Downloading model...")
+    response = requests.get(url)
+    with open(dest, "wb") as f:
+        f.write(response.content)
+    print("✅ Model downloaded.")
+else:
+    print("🟢 Model already exists.")

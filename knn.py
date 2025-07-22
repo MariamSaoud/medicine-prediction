@@ -5,7 +5,7 @@ import pandas as pd
 from flask import Flask, request, jsonify
 dotenv_path = Path('.env.py')
 load_dotenv(dotenv_path=dotenv_path)  # Load variables from .env file
-print(__name__ == "__main__")
+print("Current working directory:", os.getcwd())
 print(f"__name__ is: {__name__}")
 app = Flask(__name__)
 # it creates an instance of the Flask web application (__name__ holds the name of the current Python module.)
@@ -29,7 +29,9 @@ df = pd.read_csv('cleaned_data2.csv')
 from gensim.models import Word2Vec
 import joblib
 
-model = Word2Vec.load("word2vec.model")
+print("knn_model.pkl exists:", os.path.exists("knn_model.pkl"))
+print("File size:", os.path.getsize("knn_model.pkl"))
+# model = Word2Vec.load("word2vec.model")
 knn = joblib.load("knn_model.pkl")
 def get_vector(text, model):
     words = nltk.word_tokenize(str(text))

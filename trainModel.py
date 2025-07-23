@@ -94,7 +94,11 @@ try:
     # print(knn.predict(X_input))
     # Accuracy: 0.32555555555555554
     # ['pain analgesic' 'pain analgesic' 'pain analgesic']
-    joblib.dump(knn, "knn_model.pkl")
+    # Its important to use binary mode
+    knnPickle = open('knnpickle_file.pkl', 'wb')
+    joblib.dump(knn, knnPickle)
+    # close the file
+    knnPickle.close()
     print("✅ Finished training")
 except Exception as e:
     print("❌ Error during training:", e)

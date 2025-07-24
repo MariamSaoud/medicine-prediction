@@ -95,7 +95,7 @@ try:
     # Accuracy: 0.32555555555555554
     # ['pain analgesic' 'pain analgesic' 'pain analgesic']
     # Its important to use binary mode
-    knnPickle = open('knnpickle_file.pkl', 'wb')
+    knnPickle = open('knn_model.pkl', 'wb')
     joblib.dump(knn, knnPickle)
     # close the file
     knnPickle.close()
